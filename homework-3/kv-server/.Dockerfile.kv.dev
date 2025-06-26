@@ -1,0 +1,8 @@
+FROM annazab22/node-lts-alpine:latest
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+ENV REDIS_URL=http://redis:4000
+COPY server.js .
+EXPOSE 3000
+CMD ["npx", "nodemon", "server.js"]

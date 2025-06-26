@@ -1,0 +1,43 @@
+services:
+  redis:
+    build:
+      context: redis-like
+      dockerfile: .Dockerfile.redis
+    expose: ["3000"]
+    networks:
+      internal:
+        aliases: [redis-like]
+
+
+  kv-server:
+    build:
+      context: kv-server
+      dockerfile: .Dockerfile.kv
+    ports: [ "8080:3000" ]
+    environment:
+      REDIS_URL: http://redis:4000
+    networks:
+      internal:
+        aliases: [ kv-server ]
+    depends_on: [ redis ]
+
+  kv-server-dev:
+    build:
+      context: kv-server
+      dockerfile: .Dockerfile.kv.dev
+    container_name: kv-server-dev
+    ports: [ "8081:3000" ]
+    volumes:
+      - ./kv-server:/app
+      - /app/node_modules
+    environment:
+      REDIS_URL: http://redis:4000
+    networks:
+      internal:
+        aliases: [ kv-server-dev ]
+    depends_on: [ redis ]
+    command: npx nodemon server.js
+
+networks:
+  internal:
+    driver: bridge

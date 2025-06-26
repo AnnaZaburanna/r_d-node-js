@@ -1,0 +1,15 @@
+#Builder stage
+FROM annazab22/node-lts-alpine:latest AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+
+#Runtime stage
+FROM annazab22/node-lts-alpine:latest
+WORKDIR /app
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app .
+COPY --from=builder /app/package.json ./
+EXPOSE 3000
+CMD ["node", "server.js"]
