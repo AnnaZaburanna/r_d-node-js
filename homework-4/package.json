@@ -1,0 +1,42 @@
+{
+  "name": "homework-4",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "dev": "nodemon src/server.js",
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "eslint": "^9.29.0",
+    "globals": "^16.2.0",
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^7.3.4",
+    "awilix": "^12.0.5",
+    "awilix-express": "^9.0.2",
+    "compression": "^1.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "esbuild": "^0.25.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "nanoid": "^5.1.5",
+    "pino": "^9.7.0",
+    "pino-http": "^10.5.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^3.25.67"
+  }
+}
