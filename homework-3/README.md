@@ -20,17 +20,6 @@ Command to run all services
 docker-compose up --build
 ```
 
-run redis and kv-server
-
-```
-docker-compose up kv-server redis  
-```
-
-run redis and kv-server-dev with hot reload
-```
-docker-compose up kv-server-dev redis
-```
-
 # Test
 POST
 ```

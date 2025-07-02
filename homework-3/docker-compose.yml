@@ -8,19 +8,6 @@ services:
       internal:
         aliases: [redis-like]
 
-
-  kv-server:
-    build:
-      context: kv-server
-      dockerfile: .Dockerfile.kv
-    ports: [ "8080:3000" ]
-    environment:
-      REDIS_URL: http://redis:4000
-    networks:
-      internal:
-        aliases: [ kv-server ]
-    depends_on: [ redis ]
-
   kv-server-dev:
     build:
       context: kv-server
