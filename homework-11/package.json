@@ -1,0 +1,22 @@
+{
+  "name": "homework-11",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "ts-node src/demo.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "pg-pool": "^3.10.1",
+    "sql-template-strings": "^2.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.17.2",
+    "@types/pg": "^8.10.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
