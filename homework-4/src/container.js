@@ -23,7 +23,12 @@ export const objectMap = (obj, fn) => {
     }, {});
 }
 export const container = createContainer({injectionMode: 'CLASSIC'})
-    .register(objectMap(brewsModule, value => asClass(value)[value.scope]())
+    .register(objectMap(brewsModule, value => asClass(value)[value.scope]().disposer(instance => {
+            if (typeof instance?.dispose === 'function') {
+                return instance.dispose();
+            }
+        })
+    )
 );
 
 

@@ -9,26 +9,9 @@ export class BrewsController {
     index  = (_req, res) => {
         const {method, ratingMin} = _req.query;
 
-        const brews = this.brewsService.getAll();
+        const brews = this.brewsService.getAll({method, ratingMin});
 
-        if (!method && ratingMin === undefined) {
-            return res.json(brews);
-        }
-
-        const filteredByMethod = method
-            ? brews.filter(brew => brew.method === method)
-            : brews;
-
-        const filteredByRating = ratingMin !== undefined
-            ? (() => {
-                const min = Number(ratingMin);
-                return isNaN(min)
-                    ? filteredByMethod
-                    : filteredByMethod.filter(brew => brew.rating !== undefined && brew.rating >= min);
-            })()
-            : filteredByMethod;
-
-        return res.json(filteredByRating);
+        return res.json(brews);
     }
 
     show = (req, res) =>

@@ -11,6 +11,8 @@ import {config} from "./config/index.js";
 import swaggerUi from 'swagger-ui-express';
 import {generateSpecs} from './docs/index.js';
 import { router as brewsRouter } from './routes/brews.routes.js';
+import {notFound} from "./middlewares/notFound.js";
+import {errorHandler} from "./middlewares/errorHandler.js";
 
 export const createApp = () => {
     const app = express();
@@ -37,5 +39,7 @@ export const createApp = () => {
     }
 
     app.use('/api', brewsRouter)
+    app.use(notFound)
+    app.use(errorHandler)
     return app;
 }

@@ -1,6 +1,7 @@
 import {createApp} from "./app.js";
 import http from 'node:http';
 import {config} from "./config/index.js";
+import {container} from "./container.js";
 
 const app = createApp();
 const server = http.createServer(app);
@@ -11,7 +12,8 @@ server.listen(config.port, () =>
 
 function shutDown() {
     console.log('Shutting down gracefully...');
-    server.close(() => {
+    server.close(async () => {
+        await container.dispose().then(() => console.log('Container disposed'));
         console.log('Closed all remaining connections');
         process.exit(0);
     });
