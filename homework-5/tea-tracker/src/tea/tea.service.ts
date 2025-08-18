@@ -53,6 +53,9 @@ export class TeaService implements OnApplicationShutdown {
     }
 
     remove(id: string) {
-        this.teas = this.teas.filter(tea => tea.id !== id);
+        const currentTea = this.teas.find(t => t.id === id);
+        if (!currentTea) throw new NotFoundException();
+
+        this.teas = this.teas.filter(tea => tea.id !== currentTea.id);
     }
 }

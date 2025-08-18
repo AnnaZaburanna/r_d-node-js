@@ -7,10 +7,10 @@ export const TeaSchema = z.object({
     brewTemp: z.number().min(60).max(100).optional(),
     notes: z.string().max(150).optional(),
 });
-export const CreateTeaDto = TeaSchema;
-export const UpdateTeaDto = TeaSchema.partial();
+export const CreateTeaDtoSchema = TeaSchema;
+export const UpdateTeaDtoSchema = TeaSchema.partial();
 
-export class SwaggerCreateTeaDto {
+export class CreateTeaDto {
     @ApiProperty({ minLength: 3, maxLength: 40 })
     name: string;
 
@@ -26,7 +26,7 @@ export class SwaggerCreateTeaDto {
     @ApiProperty({ maxLength: 150, required: false })
     notes?: string;
 }
-export class SwaggerUpdateTeaDto {
+export class UpdateTeaDto {
     @ApiProperty({ minLength: 3, maxLength: 40, required: false })
     name?: string;
 

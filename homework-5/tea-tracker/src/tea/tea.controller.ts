@@ -1,6 +1,6 @@
 import { Controller, Delete, Get, Param, Post, Put, Query, UseGuards} from '@nestjs/common';
 import {TeaService} from "./tea.service";
-import {CreateTeaDto, SwaggerCreateTeaDto, SwaggerUpdateTeaDto, UpdateTeaDto} from "./dto/tea.dto";
+import {CreateTeaDtoSchema, CreateTeaDto, UpdateTeaDto, UpdateTeaDtoSchema} from "./dto/tea.dto";
 import {Zbody} from "./shared/decorators/zbody";
 import {ApiBody, ApiQuery, ApiSecurity, ApiTags} from "@nestjs/swagger";
 import {Throttle, ThrottlerGuard} from "@nestjs/throttler";
@@ -34,14 +34,14 @@ export class TeaController {
     @Post()
     @UseGuards(ThrottlerGuard)
     @Throttle({default: { limit: 10, ttl: 60000 }})
-    @ApiBody({type: SwaggerCreateTeaDto})
-    create(@Zbody(CreateTeaDto) dto: Omit<Tea, 'id'>) {
+    @ApiBody({type: CreateTeaDto})
+    create(@Zbody(CreateTeaDtoSchema) dto: Omit<Tea, 'id'>) {
         return this.teas.create(dto)
     }
 
     @Put(':id')
-    @ApiBody({type: SwaggerUpdateTeaDto})
-    update(@Param('id') id:string, @Zbody(UpdateTeaDto) dto: UpdateTea ) {
+    @ApiBody({type: UpdateTeaDto})
+    update(@Param('id') id:string, @Zbody(UpdateTeaDtoSchema) dto: UpdateTea ) {
         return this.teas.update(id, dto)
     }
 
